@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Results</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="{{ url_for('static', filename='css/bootstrap.min.css')}}"
+      rel="stylesheet"
+    />
+
+    <link
+      href="{{ url_for('static', filename='css/bootstrap-icons.css')}}"
+      rel="stylesheet"
+    />
+
+    <link
+      href="{{ url_for('static', filename='css/magnific-popup.css')}}"
+      rel="stylesheet"
+    />
+
+    <link
+      href="{{ url_for('static', filename='css/templatemo-first-portfolio-style.css')}}"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="hero" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin-top: 100px; margin-right: 100px;">
+    <div>
+      <h2 style="color: #535da1; margin-left: 400px; margin-bottom: 20px;">Images related to the predicted class</h2>
+      {% if class_images %}
+      <div style="display: flex; flex-wrap: wrap; margin-left: 40px;">
+        {% for image_path in class_images %}
+          <img
+            src="{{ url_for('static', filename=predicted_class_folder + '/' + image_path) }}"
+            alt="Class Image"
+            style="width: 250px; height: 240px; margin: 10px; border: 2px solid #fff; padding: 5px;"
+          />
+          {% if loop.index % 3 == 0 %}
+            <br>
+          {% endif %}
+        {% endfor %}
+      </div>
+      {% else %}
+      <p>No images found for the predicted class.</p>
+      {% endif %}
+    </div>
+  </body>
+</html>

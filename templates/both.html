@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Classifier</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+        <link href="{{ url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
+
+        <link href="{{ url_for('static', filename='css/bootstrap-icons.css')}}" rel="stylesheet">
+
+        <link href="{{ url_for('static', filename='css/magnific-popup.css')}}" rel="stylesheet">
+
+        <link href="{{ url_for('static', filename='css/templatemo-first-portfolio-style.css')}}" rel="stylesheet">
+</head>
+
+<body class="hero" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0;">
+
+    <h1 style="margin-bottom: 20px;">Image Classifier</h1>
+
+    {% if file_path %}
+    <!-- Results section -->
+    <h2>Uploaded Image</h2>
+    <img src="{{ url_for('static', filename=predicted_class_folder + '/' + file_path.split('/')[-1]) }}" alt="Uploaded Image" style="max-width: 400px;">
+    <h2>Images related to the predicted class</h2>
+    {% if class_images %}
+    <div style="display: flex;">
+        {% for image_path in class_images %}
+        <img src="{{ url_for('static', filename=predicted_class_folder + '/' + image_path) }}" alt="Class Image" style="max-width: 200px; margin-right: 10px;"> {% endfor %}
+    </div>
+    {% else %}
+    <p>No images found for the predicted class.</p>
+    {% endif %} {% else %}
+    <!-- Form section -->
+    <form method="post" enctype="multipart/form-data" style="margin-top: 20px;">
+        <input type="file" name="file" accept=".jpg, .jpeg, .png">
+        <button type="submit" class="custom-btn btn custom-link">Upload Image</button>
+    </form>
+    {% endif %}
+
+</body>
+
+</html>
